@@ -32,7 +32,7 @@ class BurgerBuilder extends Component {
 
         const priceAddition = INGREDIENT_PRICES[type];
         const oldPrice = this.state.totalPrice;
-        const newPrice = oldPrice + priceAddition;
+        const newPrice = Math.round((oldPrice + priceAddition + Number.EPSILON) * 100) / 100;
 
         this.setState({
             totalPrice: newPrice,
@@ -55,7 +55,7 @@ class BurgerBuilder extends Component {
 
         const priceSubtraction = INGREDIENT_PRICES[type];
         const oldPrice = this.state.totalPrice;
-        const newPrice = oldPrice - priceSubtraction;
+        const newPrice = Math.round((oldPrice - priceSubtraction + Number.EPSILON) * 100) / 100;
 
         this.setState({
             totalPrice: newPrice,
@@ -75,6 +75,9 @@ class BurgerBuilder extends Component {
         return (
             <React.Fragment>
                 <Burger ingredients={this.state.ingredients} />
+                <div>
+                    <p>{this.state.totalPrice}</p>
+                </div>
                 <BuildControls 
                     ingredientAdded={this.addIngredientHandler}
                     ingredientRemoved={this.removeIngredientHandler}
