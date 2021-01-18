@@ -84,10 +84,13 @@ class ContactData extends Component {
                         {value: "cheapest", displayValue: "Cheapest"},
                     ]
                 },
-                value: "Fastest",
+                value: "fastest",
+                validation: {},
+                valid: true,
             },
         },
         loading: false,
+        formIsValid: false,
     };
 
     orderHandler = (event) => {
@@ -135,21 +138,27 @@ class ContactData extends Component {
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
-        const updateOrderForm = {
+        const updatedOrderForm = {
             ...this.state.orderForm
         };
 
         const updatedFormElement = {
-            ...updateOrderForm[inputIdentifier]
+            ...updatedOrderForm[inputIdentifier]
         };
 
         updatedFormElement.value = event.target.value;
         updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
         updatedFormElement.touched = true;
 
-        updateOrderForm[inputIdentifier] = updatedFormElement;
+        updatedOrderForm[inputIdentifier] = updatedFormElement;
 
-        this.setState({orderForm: updateOrderForm});
+        let formIsValid = true;
+        
+        for (let inputIdentifier in updatedOrderForm) {
+            formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid; 
+        }
+        console.log(formIsValid);
+        this.setState({orderForm: updatedOrderForm, formIsValid: formIsValid});
     }
 
     render () {
@@ -174,7 +183,7 @@ class ContactData extends Component {
                         touched={formElement.config.touched}
                         changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
                 ))}
-                <Button btnType="Success">ORDER</Button>
+                <Button btnType="Success" disabled={!this.state.formIsValid}>ORDER</Button>
             </form>
         );
 
