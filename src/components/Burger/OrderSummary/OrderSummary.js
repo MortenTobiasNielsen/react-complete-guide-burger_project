@@ -3,11 +3,6 @@ import React, { Component } from "react";
 import Button from "../../UI/Button/Button"
 
 class OrderSummary extends Component {
-    // This could be a functional component, doesn't need to be a class
-    componentDidUpdate() {
-        console.log("[orderSummary] Did update" )
-    }
-
     render () {
         const ingredientSummary = Object.keys(this.props.ingredients)
         .map(igKey => {
