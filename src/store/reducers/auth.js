@@ -14,8 +14,8 @@ const authSuccess = (state, action) => {
         userId: action.userId,
         error: null,
         loading: false,
-    })
-}
+    });
+};
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -28,6 +28,9 @@ const reducer = (state = initialState, action) => {
         case (actionTypes.AUTH_FAIL):
             return updateObject(state, {error: action.error, loading: false});
             
+        case (actionTypes.AUTH_LOGOUT):
+            return updateObject(state, {token: null, userId: null});
+
         default:
             return state;
     }
