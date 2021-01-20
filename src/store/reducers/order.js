@@ -33,6 +33,7 @@ const reducer = (state = initialState, action) => {
             return updateObject(state, {loading: true});
 
         case (actionTypes.FETCH_ORDERS_SUCCESS):
+            console.log(action.orders);
             return updateObject(state, {orders: action.orders, loading: false});
 
         case (actionTypes.FETCH_ORDERS_FAIL):
