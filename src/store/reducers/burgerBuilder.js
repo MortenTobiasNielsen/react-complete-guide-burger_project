@@ -30,7 +30,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 ingredients: {
                     ...state.ingredients,
-                    [action.ingredientName]: state.ingredients[action.ingredientName] - 1, // TO DO: ensure that the amount of an ingredient is >= 0
+                    [action.ingredientName]: state.ingredients[action.ingredientName] - 1,
                 },
                 totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName],
             };
@@ -39,6 +39,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 ingredients: action.ingredients,
+                totalPrice: 4, // This resets the price, when a burger is purchased, but ingredients and price is not saved when a user goes back - this will not be addressed right now.
                 error: false,
             }
 
