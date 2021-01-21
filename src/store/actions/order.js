@@ -1,5 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios-orders"
+import { updateObject } from "../../shared/utility";
 
 export const purchaseBurgerSuccess = (id, orderData) => {
     return {
@@ -71,10 +72,7 @@ export const fetchOrders = (token, userId) => {
         .then(res => {
             const fetchedOrders = [];
             for (let key in res.data) {
-                fetchedOrders.push({
-                    ...res.data[key],
-                    id: key,
-                });
+                fetchedOrders.push(updateObject(res.data[key], {id: key}));
             }
             dispatch(fetchOrdersSuccess(fetchedOrders));
         })
