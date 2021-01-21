@@ -67,6 +67,7 @@ class BurgerBuilder extends Component {
                         purchasable={this.updatePurchaseState(this.props.ings)}
                         ordered={this.purchaseHandler}
                         price={this.props.totalPrice}
+                        isAuth={this.props.isAuth}
                     />
                 </React.Fragment>
             );
@@ -97,6 +98,7 @@ const mapStateToProps = state => {
         ings: state.burgerBuilder.ingredients,
         totalPrice: state.burgerBuilder.totalPrice,
         error: state.burgerBuilder.error,
+        isAuth: state.auth.token !== null,
     };
 };
 
