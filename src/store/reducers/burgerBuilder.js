@@ -5,6 +5,7 @@ const initialState = {
     ingredients: null,
     totalPrice: 4,
     error: false,
+    isBuilding: false,
 }
 
 const INGREDIENT_PRICES = {
@@ -18,6 +19,7 @@ const addIngredient = (state, action) => {
     return updateObject(state, {
         ingredients: updateObject(state.ingredients, {[action.ingredientName]: state.ingredients[action.ingredientName] + 1}),
         totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName],
+        isBuilding: true,
     });
 };
 
@@ -33,6 +35,7 @@ const setIngredients = (state, action) => {
         ingredients: action.ingredients,
         totalPrice: 4, // This resets the price, when a burger is purchased, but ingredients and price is not saved when a user goes back - this will not be addressed right now.
         error: false,
+        isBuilding: false,
     });
 };
 
